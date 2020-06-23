@@ -1,1 +1,15 @@
-// TODO: Write code to define and export the Engineer class.  HINT: This class should inherit from Employee.
+const Employee = requre("./Employee");
+
+class Engineer extends Employee {
+    constructor(name, id, email, GitHubUser){
+        super(name, id, email);
+        this.GitHubUser = GitHubUser;
+    }
+    getRole(){
+        return "Engineer";
+    }
+    getGitHub(){
+        return this.GitHubUser;
+    }
+}
+module.exports = Engineer;
