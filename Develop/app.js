@@ -73,6 +73,28 @@ function newManager(){
             new Manager(manager.name, manager.id, manager.email manager.officeNumber)
         );
         employeePrompt();
-    })
+    });
 }
 
+function employeePrompt() {
+    inquirer.prompt([
+        {
+            name: "employee",
+            type: "list",
+            message: "What employee would you like to add?",
+            choices: [
+                "Add Intern",
+                "Add Engineer",
+                "Build HTML"
+            ]
+        }
+    ]).then(employeeData => {
+        if (employeeData.employee === "Add Intern") {
+            buildIntern();
+        } else if (employeeData.employee === "Add Engineer") {
+            buildEngineer();
+        } else {
+            render(teamMembers);
+        }
+    });
+}
