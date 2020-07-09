@@ -12,31 +12,7 @@ const render = require("./lib/htmlRenderer");
 
 const newEmployees = [];
 ​
-// ​inquirer.prompt([
-//     {
-//         type:"input",
-//         name:"username",
-//         message:"Enter employee name: "
-//     },
-//     {
-//         type:"number",
-//         name:"id",
-//         message:"Enter employee ID number: "
-//     },
-//     {
-//         type:"input",
-//         name:"id",
-//         message:"Enter title: "
-//     }
-// ]).then(function(res){
-//     const fileData = JSON.stringify(res, null, 2);
-//     fs.writeFile("test.json", fileData, function(err){
-//         if(err){
-//             console.log(err);
-//         }
-//     });
-//     console.log(res);
-// });
+
 
 async function init(){
     const manager = await newManager();
@@ -70,7 +46,7 @@ function newManager(){
         }
     ]).then(function(manager){
         newTeam.push(
-            new Manager(manager.name, manager.id, manager.email manager.officeNumber)
+            new Manager(manager.name, manager.id, manager.email, manager.officeNumber)
         );
         employeePrompt();
     });
@@ -94,7 +70,37 @@ function employeePrompt() {
         } else if (employeeData.employee === "Add Engineer") {
             buildEngineer();
         } else {
-            render(teamMembers);
+            render(newTeam);
         }
     });
 }
+
+function buildIntern() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is your intern's name?"
+        },
+        {
+            type: "number",
+            name: "id",
+            message: "What is your intern's id?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is your intern's email?"
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "What is your intern's school?"
+        },
+    ]).then(function (intern) {
+        newTeam.push(
+            new Intern(intern.name, intern.id, intern.email, intern.school)
+        );
+        promptForEmployee();
+    });
+};
