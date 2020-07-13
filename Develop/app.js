@@ -99,7 +99,7 @@ function buildIntern() {
             name: "school",
             message: "Attending school: "
         },
-    ]).then(function (intern) {
+    ]).then(function(intern) {
         newTeam.push(
             new Intern(intern.name, intern.id, intern.email, intern.school)
         );
@@ -127,9 +127,13 @@ function buildEngineer(){
         },
         {
             type: "input",
-            name: "GitHub",
+            name: "GitHubUser",
             message: "GitHub username: "
         }
-    ])
+    ]).then(function(engineer){
+        newTeam.push(
+            new Engineer(engineer.name, engineer.id, engineer.email, engineer.GitHubUser)
+        );
+    });
 }
 
