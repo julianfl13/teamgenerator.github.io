@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 ​
 const render = require("./lib/htmlRenderer");
+const { type } = require("os");
 
 const newEmployees = [];
 ​
@@ -19,6 +20,7 @@ async function init(){
     newTeam.push(new Manager(manager.name, manager.id, manager.email, manager.officeNumber));
     employeePrompt();
 }
+
 init();
 
 function newManager(){
@@ -80,27 +82,54 @@ function buildIntern() {
         {
             type: "input",
             name: "name",
-            message: "What is your intern's name?"
+            message: "Intern name: "
         },
         {
             type: "number",
             name: "id",
-            message: "What is your intern's id?"
+            message: "Intern ID: "
         },
         {
             type: "input",
             name: "email",
-            message: "What is your intern's email?"
+            message: "Intern email: "
         },
         {
             type: "input",
             name: "school",
-            message: "What is your intern's school?"
+            message: "Attending school: "
         },
     ]).then(function (intern) {
         newTeam.push(
             new Intern(intern.name, intern.id, intern.email, intern.school)
         );
-        promptForEmployee();
+        employeePrompt();
     });
-};
+}
+
+function buildEngineer(){
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Name of engineer: "
+        },
+        {
+            type: "number",
+            name: "id",
+            message: "Engineer's ID: "
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Enter engineer's email: "
+
+        },
+        {
+            type: "input",
+            name: "GitHub",
+            message: "GitHub username: "
+        }
+    ])
+}
+
